@@ -1,4 +1,4 @@
-package symc
+package clanglex
 
 import (
 	_ "reflect"
