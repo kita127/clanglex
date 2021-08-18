@@ -11,8 +11,8 @@ type Lexer struct {
 }
 
 type Token struct {
-	tokenType int
-	literal   string
+	TokenType int
+	Literal   string
 }
 
 const (
@@ -97,7 +97,7 @@ const (
 )
 
 func (t *Token) String() string {
-	return fmt.Sprintf("tokenType:%v, literal:%s", t.tokenType, t.literal)
+	return fmt.Sprintf("tokenType:%v, literal:%s", t.TokenType, t.Literal)
 }
 
 func NewLexer(src string) *Lexer {
@@ -109,7 +109,7 @@ func (l *Lexer) lexicalize() []*Token {
 	for {
 		t := l.nextToken()
 		ts = append(ts, t)
-		if t.tokenType == eof {
+		if t.TokenType == eof {
 			break
 		}
 	}
@@ -132,189 +132,189 @@ func (l *Lexer) nextToken() *Token {
 
 	// ソースの終端
 	if l.pos >= len(l.input) {
-		return &Token{tokenType: eof, literal: "eof"}
+		return &Token{TokenType: eof, Literal: "eof"}
 	}
 
 	var tk *Token
 	c := l.input[l.pos]
 	switch c {
 	case '=':
-		tk = &Token{tokenType: assign, literal: "="}
+		tk = &Token{TokenType: assign, Literal: "="}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: eq, literal: "=="}
+			tk = &Token{TokenType: eq, Literal: "=="}
 			l.pos++
 		}
 	case '+':
-		tk = &Token{tokenType: plus, literal: "+"}
+		tk = &Token{TokenType: plus, Literal: "+"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '+' {
-			tk = &Token{tokenType: increment, literal: "++"}
+			tk = &Token{TokenType: increment, Literal: "++"}
 			l.pos++
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: plusAssigne, literal: "+="}
+			tk = &Token{TokenType: plusAssigne, Literal: "+="}
 			l.pos++
 		}
 	case '-':
-		tk = &Token{tokenType: minus, literal: "-"}
+		tk = &Token{TokenType: minus, Literal: "-"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '>' {
 			// ->
-			tk = &Token{tokenType: arrow, literal: "->"}
+			tk = &Token{TokenType: arrow, Literal: "->"}
 			l.pos++
 		} else if l.input[l.pos] == '-' {
-			tk = &Token{tokenType: decrement, literal: "--"}
+			tk = &Token{TokenType: decrement, Literal: "--"}
 			l.pos++
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: minusAssigne, literal: "-="}
+			tk = &Token{TokenType: minusAssigne, Literal: "-="}
 			l.pos++
 		}
 	case '!':
-		tk = &Token{tokenType: bang, literal: "!"}
+		tk = &Token{TokenType: bang, Literal: "!"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: ne, literal: "!="}
+			tk = &Token{TokenType: ne, Literal: "!="}
 			l.pos++
 		}
 	case '*':
-		tk = &Token{tokenType: asterisk, literal: "*"}
+		tk = &Token{TokenType: asterisk, Literal: "*"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: asteriskAssigne, literal: "*="}
+			tk = &Token{TokenType: asteriskAssigne, Literal: "*="}
 			l.pos++
 		}
 	case '/':
-		tk = &Token{tokenType: slash, literal: "/"}
+		tk = &Token{TokenType: slash, Literal: "/"}
 		l.pos++
 		if l.pos >= len(l.input) {
 			// 何もしない
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: slashAssigne, literal: "/="}
+			tk = &Token{TokenType: slashAssigne, Literal: "/="}
 			l.pos++
 		} else if l.input[l.pos] == '*' {
 			// comment
 			l.pos++
 			com := l.readComment()
-			tk = &Token{tokenType: comment, literal: com}
+			tk = &Token{TokenType: comment, Literal: com}
 		}
 	case '<':
-		tk = &Token{tokenType: lt, literal: "<"}
+		tk = &Token{TokenType: lt, Literal: "<"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '<' {
-			tk = &Token{tokenType: leftShift, literal: "<<"}
+			tk = &Token{TokenType: leftShift, Literal: "<<"}
 			l.pos++
 			if l.pos >= len(l.input) {
 			} else if l.input[l.pos] == '=' {
-				tk = &Token{tokenType: leftShiftAssigne, literal: "<<="}
+				tk = &Token{TokenType: leftShiftAssigne, Literal: "<<="}
 				l.pos++
 			}
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: lteq, literal: "<="}
+			tk = &Token{TokenType: lteq, Literal: "<="}
 			l.pos++
 		}
 	case '>':
-		tk = &Token{tokenType: gt, literal: ">"}
+		tk = &Token{TokenType: gt, Literal: ">"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '>' {
-			tk = &Token{tokenType: rightShift, literal: ">>"}
+			tk = &Token{TokenType: rightShift, Literal: ">>"}
 			l.pos++
 			if l.pos >= len(l.input) {
 			} else if l.input[l.pos] == '=' {
-				tk = &Token{tokenType: rightShiftAssigne, literal: ">>="}
+				tk = &Token{TokenType: rightShiftAssigne, Literal: ">>="}
 				l.pos++
 			}
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: gteq, literal: ">="}
+			tk = &Token{TokenType: gteq, Literal: ">="}
 			l.pos++
 		}
 	case ';':
-		tk = &Token{tokenType: semicolon, literal: ";"}
+		tk = &Token{TokenType: semicolon, Literal: ";"}
 		l.pos++
 	case '(':
-		tk = &Token{tokenType: lparen, literal: "("}
+		tk = &Token{TokenType: lparen, Literal: "("}
 		l.pos++
 	case ')':
-		tk = &Token{tokenType: rparen, literal: ")"}
+		tk = &Token{TokenType: rparen, Literal: ")"}
 		l.pos++
 	case ',':
-		tk = &Token{tokenType: comma, literal: ","}
+		tk = &Token{TokenType: comma, Literal: ","}
 		l.pos++
 	case '{':
-		tk = &Token{tokenType: lbrace, literal: "{"}
+		tk = &Token{TokenType: lbrace, Literal: "{"}
 		l.pos++
 	case '}':
-		tk = &Token{tokenType: rbrace, literal: "}"}
+		tk = &Token{TokenType: rbrace, Literal: "}"}
 		l.pos++
 	case '[':
-		tk = &Token{tokenType: lbracket, literal: "["}
+		tk = &Token{TokenType: lbracket, Literal: "["}
 		l.pos++
 	case ']':
-		tk = &Token{tokenType: rbracket, literal: "]"}
+		tk = &Token{TokenType: rbracket, Literal: "]"}
 		l.pos++
 	case '&':
-		tk = &Token{tokenType: ampersand, literal: "&"}
+		tk = &Token{TokenType: ampersand, Literal: "&"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '&' {
-			tk = &Token{tokenType: and, literal: "&&"}
+			tk = &Token{TokenType: and, Literal: "&&"}
 			l.pos++
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: ampersandAssigne, literal: "&="}
+			tk = &Token{TokenType: ampersandAssigne, Literal: "&="}
 			l.pos++
 		}
 	case '~':
-		tk = &Token{tokenType: tilde, literal: "~"}
+		tk = &Token{TokenType: tilde, Literal: "~"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: tildeAssigne, literal: "~="}
+			tk = &Token{TokenType: tildeAssigne, Literal: "~="}
 			l.pos++
 		}
 	case '^':
-		tk = &Token{tokenType: caret, literal: "^"}
+		tk = &Token{TokenType: caret, Literal: "^"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: caretAssigne, literal: "^="}
+			tk = &Token{TokenType: caretAssigne, Literal: "^="}
 			l.pos++
 		}
 	case '|':
-		tk = &Token{tokenType: vertical, literal: "|"}
+		tk = &Token{TokenType: vertical, Literal: "|"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '|' {
-			tk = &Token{tokenType: or, literal: "||"}
+			tk = &Token{TokenType: or, Literal: "||"}
 			l.pos++
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: verticalAssigne, literal: "|="}
+			tk = &Token{TokenType: verticalAssigne, Literal: "|="}
 			l.pos++
 		}
 	case '%':
-		tk = &Token{tokenType: percent, literal: "%"}
+		tk = &Token{TokenType: percent, Literal: "%"}
 		l.pos++
 		if l.pos >= len(l.input) {
 		} else if l.input[l.pos] == '=' {
-			tk = &Token{tokenType: percentAssigne, literal: "%="}
+			tk = &Token{TokenType: percentAssigne, Literal: "%="}
 			l.pos++
 		}
 	case ':':
-		tk = &Token{tokenType: colon, literal: ":"}
+		tk = &Token{TokenType: colon, Literal: ":"}
 		l.pos++
 	case '?':
-		tk = &Token{tokenType: question, literal: "?"}
+		tk = &Token{TokenType: question, Literal: "?"}
 		l.pos++
 	case '.':
-		tk = &Token{tokenType: period, literal: "."}
+		tk = &Token{TokenType: period, Literal: "."}
 		l.pos++
 	case '\\':
-		tk = &Token{tokenType: backslash, literal: "\\"}
+		tk = &Token{TokenType: backslash, Literal: "\\"}
 		l.pos++
 	case '\'':
 		tk = l.readLetter()
@@ -395,9 +395,9 @@ func (l *Lexer) readNumber() *Token {
 
 	var tk *Token
 	if isFloat {
-		tk = &Token{tokenType: float, literal: w}
+		tk = &Token{TokenType: float, Literal: w}
 	} else {
-		tk = &Token{tokenType: integer, literal: w}
+		tk = &Token{TokenType: integer, Literal: w}
 	}
 	return tk
 }
@@ -420,7 +420,7 @@ func (l *Lexer) readString() *Token {
 	next++
 	w := l.input[l.pos:next]
 	l.pos = next
-	return &Token{tokenType: str, literal: w}
+	return &Token{TokenType: str, Literal: w}
 }
 
 func (l *Lexer) readHashComment() *Token {
@@ -437,7 +437,7 @@ func (l *Lexer) readHashComment() *Token {
 			break
 		}
 	}
-	tk := &Token{tokenType: comment, literal: l.input[l.pos:next]}
+	tk := &Token{TokenType: comment, Literal: l.input[l.pos:next]}
 	l.pos = next
 	return tk
 }
@@ -455,7 +455,7 @@ func (l *Lexer) readLetter() *Token {
 		l.pos++
 		l.pos++
 	}
-	return &Token{tokenType: letter, literal: string(s)}
+	return &Token{TokenType: letter, Literal: string(s)}
 }
 
 func (l *Lexer) getEscC() []byte {
@@ -476,60 +476,60 @@ func (l *Lexer) getEscC() []byte {
 }
 
 func (l *Lexer) newIllegal() *Token {
-	tk := &Token{tokenType: illegal, literal: l.input[l.pos:]}
+	tk := &Token{TokenType: illegal, Literal: l.input[l.pos:]}
 	l.pos = len(l.input)
 	return tk
 }
 
 func (l *Lexer) determineKeyword(w string) *Token {
 	if strings.Compare("return", w) == 0 {
-		return &Token{tokenType: keyReturn, literal: w}
+		return &Token{TokenType: keyReturn, Literal: w}
 	} else if strings.Compare("if", w) == 0 {
-		return &Token{tokenType: keyIf, literal: w}
+		return &Token{TokenType: keyIf, Literal: w}
 	} else if strings.Compare("else", w) == 0 {
-		return &Token{tokenType: keyElse, literal: w}
+		return &Token{TokenType: keyElse, Literal: w}
 	} else if strings.Compare("while", w) == 0 {
-		return &Token{tokenType: keyWhile, literal: w}
+		return &Token{TokenType: keyWhile, Literal: w}
 	} else if strings.Compare("do", w) == 0 {
-		return &Token{tokenType: keyDo, literal: w}
+		return &Token{TokenType: keyDo, Literal: w}
 	} else if strings.Compare("goto", w) == 0 {
-		return &Token{tokenType: keyGoto, literal: w}
+		return &Token{TokenType: keyGoto, Literal: w}
 	} else if strings.Compare("for", w) == 0 {
-		return &Token{tokenType: keyFor, literal: w}
+		return &Token{TokenType: keyFor, Literal: w}
 	} else if strings.Compare("break", w) == 0 {
-		return &Token{tokenType: keyBreak, literal: w}
+		return &Token{TokenType: keyBreak, Literal: w}
 	} else if strings.Compare("continue", w) == 0 {
-		return &Token{tokenType: keyContinue, literal: w}
+		return &Token{TokenType: keyContinue, Literal: w}
 	} else if strings.Compare("switch", w) == 0 {
-		return &Token{tokenType: keySwitch, literal: w}
+		return &Token{TokenType: keySwitch, Literal: w}
 	} else if strings.Compare("case", w) == 0 {
-		return &Token{tokenType: keyCase, literal: w}
+		return &Token{TokenType: keyCase, Literal: w}
 	} else if strings.Compare("default", w) == 0 {
-		return &Token{tokenType: keyDefault, literal: w}
+		return &Token{TokenType: keyDefault, Literal: w}
 	} else if strings.Compare("extern", w) == 0 {
-		return &Token{tokenType: keyExtern, literal: w}
+		return &Token{TokenType: keyExtern, Literal: w}
 	} else if strings.Compare("volatile", w) == 0 {
-		return &Token{tokenType: keyVolatile, literal: w}
+		return &Token{TokenType: keyVolatile, Literal: w}
 	} else if strings.Compare("const", w) == 0 {
-		return &Token{tokenType: keyConst, literal: w}
+		return &Token{TokenType: keyConst, Literal: w}
 	} else if strings.Compare("typedef", w) == 0 {
-		return &Token{tokenType: keyTypedef, literal: w}
+		return &Token{TokenType: keyTypedef, Literal: w}
 	} else if strings.Compare("union", w) == 0 {
-		return &Token{tokenType: keyUnion, literal: w}
+		return &Token{TokenType: keyUnion, Literal: w}
 	} else if strings.Compare("struct", w) == 0 {
-		return &Token{tokenType: keyStruct, literal: w}
+		return &Token{TokenType: keyStruct, Literal: w}
 	} else if strings.Compare("enum", w) == 0 {
-		return &Token{tokenType: keyEnum, literal: w}
+		return &Token{TokenType: keyEnum, Literal: w}
 	} else if strings.Compare("__attribute__", w) == 0 {
-		return &Token{tokenType: keyAttribute, literal: w}
+		return &Token{TokenType: keyAttribute, Literal: w}
 	} else if strings.Compare("void", w) == 0 {
-		return &Token{tokenType: keyVoid, literal: w}
+		return &Token{TokenType: keyVoid, Literal: w}
 	} else if strings.Compare("__asm", w) == 0 {
-		return &Token{tokenType: keyAsm, literal: w}
+		return &Token{TokenType: keyAsm, Literal: w}
 	} else if strings.Compare("sizeof", w) == 0 {
-		return &Token{tokenType: keySizeof, literal: w}
+		return &Token{TokenType: keySizeof, Literal: w}
 	} else {
-		return &Token{tokenType: word, literal: w}
+		return &Token{TokenType: word, Literal: w}
 	}
 }
 
@@ -567,7 +567,7 @@ func isDec(c byte) bool {
 // isTypeToken
 func (t *Token) isTypeToken() bool {
 
-	switch t.tokenType {
+	switch t.TokenType {
 	case word:
 	case asterisk:
 	case keyConst:
@@ -586,7 +586,7 @@ func (t *Token) isTypeToken() bool {
 }
 
 func (t *Token) isOperator() bool {
-	switch t.tokenType {
+	switch t.TokenType {
 	case assign:
 	case plus:
 	case minus:
@@ -629,7 +629,7 @@ func (t *Token) isOperator() bool {
 }
 
 func (t *Token) isPrefixExpression() bool {
-	switch t.tokenType {
+	switch t.TokenType {
 	case minus:
 	case plus:
 	case increment:
@@ -645,7 +645,7 @@ func (t *Token) isPrefixExpression() bool {
 }
 
 func (t *Token) isPostExpression() bool {
-	switch t.tokenType {
+	switch t.TokenType {
 	case lparen:
 	case increment:
 	case decrement:
@@ -656,7 +656,7 @@ func (t *Token) isPostExpression() bool {
 }
 
 func (t *Token) isCompoundOp() bool {
-	switch t.tokenType {
+	switch t.TokenType {
 	case plusAssigne:
 	case minusAssigne:
 	case asteriskAssigne:
@@ -675,5 +675,5 @@ func (t *Token) isCompoundOp() bool {
 }
 
 func (t *Token) isToken(t2 int) bool {
-	return t.tokenType == t2
+	return t.TokenType == t2
 }

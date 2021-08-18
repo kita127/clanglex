@@ -932,11 +932,11 @@ int func(int a) {
 		}
 		for i, v := range got {
 			e := tt.expect[i]
-			if v.tokenType != e.tokenType {
-				t.Errorf("got type=%v, expect type=%v", v.tokenType, tt.expect[i].tokenType)
+			if v.TokenType != e.TokenType {
+				t.Errorf("got type=%v, expect type=%v", v.TokenType, tt.expect[i].TokenType)
 			}
-			if v.literal != e.literal {
-				t.Errorf("got literal=%v, expect literal=%v", v.literal, tt.expect[i].literal)
+			if v.Literal != e.Literal {
+				t.Errorf("got literal=%v, expect literal=%v", v.Literal, tt.expect[i].Literal)
 			}
 		}
 	}
@@ -1043,11 +1043,11 @@ func TestLexComment(t *testing.T) {
 		}
 		for i, v := range got {
 			e := tt.expect[i]
-			if v.tokenType != e.tokenType {
-				t.Errorf("got type=%v, expect type=%v", v.tokenType, tt.expect[i].tokenType)
+			if v.TokenType != e.TokenType {
+				t.Errorf("got type=%v, expect type=%v", v.TokenType, tt.expect[i].TokenType)
 			}
-			if v.literal != e.literal {
-				t.Errorf("got literal=%v, expect literal=%v", v.literal, tt.expect[i].literal)
+			if v.Literal != e.Literal {
+				t.Errorf("got literal=%v, expect literal=%v", v.Literal, tt.expect[i].Literal)
 			}
 		}
 	}
