@@ -564,8 +564,8 @@ func isDec(c byte) bool {
 	return '0' <= c && c <= '9'
 }
 
-// isTypeToken
-func (t *Token) isTypeToken() bool {
+// IsTypeToken
+func (t *Token) IsTypeToken() bool {
 
 	switch t.TokenType {
 	case Word:
@@ -585,7 +585,7 @@ func (t *Token) isTypeToken() bool {
 	return true
 }
 
-func (t *Token) isOperator() bool {
+func (t *Token) IsOperator() bool {
 	switch t.TokenType {
 	case Assign:
 	case Plus:
@@ -628,7 +628,7 @@ func (t *Token) isOperator() bool {
 	return true
 }
 
-func (t *Token) isPrefixExpression() bool {
+func (t *Token) IsPrefixExpression() bool {
 	switch t.TokenType {
 	case Minus:
 	case Plus:
@@ -644,7 +644,7 @@ func (t *Token) isPrefixExpression() bool {
 	return true
 }
 
-func (t *Token) isPostExpression() bool {
+func (t *Token) IsPostExpression() bool {
 	switch t.TokenType {
 	case Lparen:
 	case Increment:
@@ -655,7 +655,7 @@ func (t *Token) isPostExpression() bool {
 	return true
 }
 
-func (t *Token) isCompoundOp() bool {
+func (t *Token) IsCompoundOp() bool {
 	switch t.TokenType {
 	case PlusAssigne:
 	case MinusAssigne:
@@ -674,6 +674,6 @@ func (t *Token) isCompoundOp() bool {
 	return true
 }
 
-func (t *Token) isToken(t2 int) bool {
+func (t *Token) IsToken(t2 int) bool {
 	return t.TokenType == t2
 }
