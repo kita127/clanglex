@@ -16,7 +16,7 @@ func TestLexicalize(t *testing.T) {
 			``,
 			[]*Token{
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -26,11 +26,11 @@ func TestLexicalize(t *testing.T) {
 			`   char   `,
 			[]*Token{
 				{
-					word,
+					Word,
 					"char",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -40,15 +40,15 @@ func TestLexicalize(t *testing.T) {
 			`   char		hoge   `,
 			[]*Token{
 				{
-					word,
+					Word,
 					"char",
 				},
 				{
-					word,
+					Word,
 					"hoge",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -58,11 +58,11 @@ func TestLexicalize(t *testing.T) {
 			`=`,
 			[]*Token{
 				{
-					assign,
+					Assign,
 					"=",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -72,71 +72,71 @@ func TestLexicalize(t *testing.T) {
 			`=+-!*/<>;(),{}[]`,
 			[]*Token{
 				{
-					assign,
+					Assign,
 					"=",
 				},
 				{
-					plus,
+					Plus,
 					"+",
 				},
 				{
-					minus,
+					Minus,
 					"-",
 				},
 				{
-					bang,
+					Bang,
 					"!",
 				},
 				{
-					asterisk,
+					Asterisk,
 					"*",
 				},
 				{
-					slash,
+					Slash,
 					"/",
 				},
 				{
-					lt,
+					Lt,
 					"<",
 				},
 				{
-					gt,
+					Gt,
 					">",
 				},
 				{
-					semicolon,
+					Semicolon,
 					";",
 				},
 				{
-					lparen,
+					Lparen,
 					"(",
 				},
 				{
-					rparen,
+					Rparen,
 					")",
 				},
 				{
-					comma,
+					Comma,
 					",",
 				},
 				{
-					lbrace,
+					Lbrace,
 					"{",
 				},
 				{
-					rbrace,
+					Rbrace,
 					"}",
 				},
 				{
-					lbracket,
+					Lbracket,
 					"[",
 				},
 				{
-					rbracket,
+					Rbracket,
 					"]",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -146,75 +146,75 @@ func TestLexicalize(t *testing.T) {
 			` = + - ! * / % < > ; ( ) , { } [ ] `,
 			[]*Token{
 				{
-					assign,
+					Assign,
 					"=",
 				},
 				{
-					plus,
+					Plus,
 					"+",
 				},
 				{
-					minus,
+					Minus,
 					"-",
 				},
 				{
-					bang,
+					Bang,
 					"!",
 				},
 				{
-					asterisk,
+					Asterisk,
 					"*",
 				},
 				{
-					slash,
+					Slash,
 					"/",
 				},
 				{
-					percent,
+					Percent,
 					"%",
 				},
 				{
-					lt,
+					Lt,
 					"<",
 				},
 				{
-					gt,
+					Gt,
 					">",
 				},
 				{
-					semicolon,
+					Semicolon,
 					";",
 				},
 				{
-					lparen,
+					Lparen,
 					"(",
 				},
 				{
-					rparen,
+					Rparen,
 					")",
 				},
 				{
-					comma,
+					Comma,
 					",",
 				},
 				{
-					lbrace,
+					Lbrace,
 					"{",
 				},
 				{
-					rbrace,
+					Rbrace,
 					"}",
 				},
 				{
-					lbracket,
+					Lbracket,
 					"[",
 				},
 				{
-					rbracket,
+					Rbracket,
 					"]",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -224,83 +224,83 @@ func TestLexicalize(t *testing.T) {
 			`&~^|:?.\-><<>>++--||&&==!=>=<=`,
 			[]*Token{
 				{
-					ampersand,
+					Ampersand,
 					"&",
 				},
 				{
-					tilde,
+					Tilde,
 					"~",
 				},
 				{
-					caret,
+					Caret,
 					"^",
 				},
 				{
-					vertical,
+					Vertical,
 					"|",
 				},
 				{
-					colon,
+					Colon,
 					":",
 				},
 				{
-					question,
+					Question,
 					"?",
 				},
 				{
-					period,
+					Period,
 					".",
 				},
 				{
-					backslash,
+					Backslash,
 					"\\",
 				},
 				{
-					arrow,
+					Arrow,
 					"->",
 				},
 				{
-					leftShift,
+					LeftShift,
 					`<<`,
 				},
 				{
-					rightShift,
+					RightShift,
 					`>>`,
 				},
 				{
-					increment,
+					Increment,
 					`++`,
 				},
 				{
-					decrement,
+					Decrement,
 					`--`,
 				},
 				{
-					or,
+					Or,
 					`||`,
 				},
 				{
-					and,
+					And,
 					`&&`,
 				},
 				{
-					eq,
+					Eq,
 					`==`,
 				},
 				{
-					ne,
+					Ne,
 					`!=`,
 				},
 				{
-					gteq,
+					Gteq,
 					`>=`,
 				},
 				{
-					lteq,
+					Lteq,
 					`<=`,
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -310,51 +310,51 @@ func TestLexicalize(t *testing.T) {
 			`+= -= *= /= |= &= <<= >>= ~= ^= %=`,
 			[]*Token{
 				{
-					plusAssigne,
+					PlusAssigne,
 					"+=",
 				},
 				{
-					minusAssigne,
+					MinusAssigne,
 					"-=",
 				},
 				{
-					asteriskAssigne,
+					AsteriskAssigne,
 					"*=",
 				},
 				{
-					slashAssigne,
+					SlashAssigne,
 					"/=",
 				},
 				{
-					verticalAssigne,
+					VerticalAssigne,
 					"|=",
 				},
 				{
-					ampersandAssigne,
+					AmpersandAssigne,
 					"&=",
 				},
 				{
-					leftShiftAssigne,
+					LeftShiftAssigne,
 					"<<=",
 				},
 				{
-					rightShiftAssigne,
+					RightShiftAssigne,
 					">>=",
 				},
 				{
-					tildeAssigne,
+					TildeAssigne,
 					"~=",
 				},
 				{
-					caretAssigne,
+					CaretAssigne,
 					"^=",
 				},
 				{
-					percentAssigne,
+					PercentAssigne,
 					"%=",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -364,23 +364,23 @@ func TestLexicalize(t *testing.T) {
 			`   ident00+123;   `,
 			[]*Token{
 				{
-					word,
+					Word,
 					"ident00",
 				},
 				{
-					plus,
+					Plus,
 					"+",
 				},
 				{
-					integer,
+					Integer,
 					"123",
 				},
 				{
-					semicolon,
+					Semicolon,
 					";",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -390,11 +390,11 @@ func TestLexicalize(t *testing.T) {
 			`# 1 "hoge.c"`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					" 1 \"hoge.c\"",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -405,15 +405,15 @@ func TestLexicalize(t *testing.T) {
 # 1 "<built-in>" 1`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					" 1 \"hoge.c\"",
 				},
 				{
-					comment,
+					Comment,
 					" 1 \"<built-in>\" 1",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -423,55 +423,55 @@ func TestLexicalize(t *testing.T) {
 			`0 0U 123 0xA1c 0765 0b0110 567u 567U 567l 567L 567lu 567UL`,
 			[]*Token{
 				{
-					integer,
+					Integer,
 					"0",
 				},
 				{
-					integer,
+					Integer,
 					"0U",
 				},
 				{
-					integer,
+					Integer,
 					"123",
 				},
 				{
-					integer,
+					Integer,
 					"0xA1c",
 				},
 				{
-					integer,
+					Integer,
 					"0765",
 				},
 				{
-					integer,
+					Integer,
 					"0b0110",
 				},
 				{
-					integer,
+					Integer,
 					"567u",
 				},
 				{
-					integer,
+					Integer,
 					"567U",
 				},
 				{
-					integer,
+					Integer,
 					"567l",
 				},
 				{
-					integer,
+					Integer,
 					"567L",
 				},
 				{
-					integer,
+					Integer,
 					"567lu",
 				},
 				{
-					integer,
+					Integer,
 					"567UL",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -481,19 +481,19 @@ func TestLexicalize(t *testing.T) {
 			`0.123 987.123 123.`,
 			[]*Token{
 				{
-					float,
+					Float,
 					"0.123",
 				},
 				{
-					float,
+					Float,
 					"987.123",
 				},
 				{
-					float,
+					Float,
 					"123.",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -504,91 +504,91 @@ func TestLexicalize(t *testing.T) {
  extern volatile const typedef union struct enum __attribute__ void`,
 			[]*Token{
 				{
-					keyReturn,
+					KeyReturn,
 					"return",
 				},
 				{
-					keyIf,
+					KeyIf,
 					"if",
 				},
 				{
-					keyElse,
+					KeyElse,
 					"else",
 				},
 				{
-					keyWhile,
+					KeyWhile,
 					"while",
 				},
 				{
-					keyDo,
+					KeyDo,
 					"do",
 				},
 				{
-					keyGoto,
+					KeyGoto,
 					"goto",
 				},
 				{
-					keyFor,
+					KeyFor,
 					"for",
 				},
 				{
-					keyBreak,
+					KeyBreak,
 					"break",
 				},
 				{
-					keyContinue,
+					KeyContinue,
 					"continue",
 				},
 				{
-					keySwitch,
+					KeySwitch,
 					"switch",
 				},
 				{
-					keyCase,
+					KeyCase,
 					"case",
 				},
 				{
-					keyDefault,
+					KeyDefault,
 					"default",
 				},
 				{
-					keyExtern,
+					KeyExtern,
 					"extern",
 				},
 				{
-					keyVolatile,
+					KeyVolatile,
 					"volatile",
 				},
 				{
-					keyConst,
+					KeyConst,
 					"const",
 				},
 				{
-					keyTypedef,
+					KeyTypedef,
 					"typedef",
 				},
 				{
-					keyUnion,
+					KeyUnion,
 					"union",
 				},
 				{
-					keyStruct,
+					KeyStruct,
 					"struct",
 				},
 				{
-					keyEnum,
+					KeyEnum,
 					"enum",
 				},
 				{
-					keyAttribute,
+					KeyAttribute,
 					"__attribute__",
 				},
 				{
-					keyVoid,
+					KeyVoid,
 					"void",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -598,35 +598,35 @@ func TestLexicalize(t *testing.T) {
 			`char hoge[] = "hello";`,
 			[]*Token{
 				{
-					word,
+					Word,
 					"char",
 				},
 				{
-					word,
+					Word,
 					"hoge",
 				},
 				{
-					lbracket,
+					Lbracket,
 					"[",
 				},
 				{
-					rbracket,
+					Rbracket,
 					"]",
 				},
 				{
-					assign,
+					Assign,
 					"=",
 				},
 				{
-					str,
+					Str,
 					"\"hello\"",
 				},
 				{
-					semicolon,
+					Semicolon,
 					";",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -636,27 +636,27 @@ func TestLexicalize(t *testing.T) {
 			`int hoge = 0;`,
 			[]*Token{
 				{
-					word,
+					Word,
 					"int",
 				},
 				{
-					word,
+					Word,
 					"hoge",
 				},
 				{
-					assign,
+					Assign,
 					"=",
 				},
 				{
-					integer,
+					Integer,
 					"0",
 				},
 				{
-					semicolon,
+					Semicolon,
 					";",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -674,87 +674,87 @@ int func(int a) {
 `,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					` 1 "hoge.c"`,
 				},
 				{
-					word,
+					Word,
 					`int`,
 				},
 				{
-					word,
+					Word,
 					`func`,
 				},
 				{
-					lparen,
+					Lparen,
 					`(`,
 				},
 				{
-					word,
+					Word,
 					`int`,
 				},
 				{
-					word,
+					Word,
 					`a`,
 				},
 				{
-					rparen,
+					Rparen,
 					`)`,
 				},
 				{
-					lbrace,
+					Lbrace,
 					`{`,
 				},
 				{
-					word,
+					Word,
 					`a`,
 				},
 				{
-					assign,
+					Assign,
 					`=`,
 				},
 				{
-					word,
+					Word,
 					`a`,
 				},
 				{
-					plus,
+					Plus,
 					`+`,
 				},
 				{
-					lparen,
+					Lparen,
 					`(`,
 				},
 				{
-					integer,
+					Integer,
 					`10`,
 				},
 				{
-					rparen,
+					Rparen,
 					`)`,
 				},
 				{
-					semicolon,
+					Semicolon,
 					`;`,
 				},
 				{
-					keyReturn,
+					KeyReturn,
 					`return`,
 				},
 				{
-					word,
+					Word,
 					`a`,
 				},
 				{
-					semicolon,
+					Semicolon,
 					`;`,
 				},
 				{
-					rbrace,
+					Rbrace,
 					`}`,
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -764,15 +764,15 @@ int func(int a) {
 			`'A' '\n'`,
 			[]*Token{
 				{
-					letter,
+					Letter,
 					"A",
 				},
 				{
-					letter,
+					Letter,
 					"\\n",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -784,47 +784,47 @@ int func(int a) {
 `,
 			[]*Token{
 				{
-					letter,
+					Letter,
 					`"`,
 				},
 				{
-					letter,
+					Letter,
 					`\\`,
 				},
 				{
-					letter,
+					Letter,
 					`\b`,
 				},
 				{
-					letter,
+					Letter,
 					`\f`,
 				},
 				{
-					letter,
+					Letter,
 					`\n`,
 				},
 				{
-					letter,
+					Letter,
 					`\r`,
 				},
 				{
-					letter,
+					Letter,
 					`\t`,
 				},
 				{
-					letter,
+					Letter,
 					`\033`,
 				},
 				{
-					letter,
+					Letter,
 					`\'`,
 				},
 				{
-					letter,
+					Letter,
 					`\0`,
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -841,31 +841,31 @@ int func(int a) {
             `,
 			[]*Token{
 				{
-					str,
+					Str,
 					`"\\\\"`,
 				},
 				{
-					str,
+					Str,
 					`"\\b"`,
 				},
 				{
-					str,
+					Str,
 					`"\\f"`,
 				},
 				{
-					str,
+					Str,
 					`"\\n"`,
 				},
 				{
-					str,
+					Str,
 					`"\\r"`,
 				},
 				{
-					str,
+					Str,
 					`"\\t"`,
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -878,15 +878,15 @@ int func(int a) {
 `,
 			[]*Token{
 				{
-					str,
+					Str,
 					`"\""`,
 				},
 				{
-					str,
+					Str,
 					`"\" ***\\"`,
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -898,11 +898,11 @@ int func(int a) {
 `,
 			[]*Token{
 				{
-					keySizeof,
+					KeySizeof,
 					"sizeof",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -912,11 +912,11 @@ int func(int a) {
 			`__asm`,
 			[]*Token{
 				{
-					keyAsm,
+					KeyAsm,
 					"__asm",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -953,11 +953,11 @@ func TestLexComment(t *testing.T) {
 			`/**/`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					"",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -967,11 +967,11 @@ func TestLexComment(t *testing.T) {
 			`/* hoge */`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					" hoge ",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -981,11 +981,11 @@ func TestLexComment(t *testing.T) {
 			`/** */`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					"* ",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -995,11 +995,11 @@ func TestLexComment(t *testing.T) {
 			`/* **/`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					" *",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -1009,11 +1009,11 @@ func TestLexComment(t *testing.T) {
 			`/* /* */`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					" /* ",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
@@ -1023,11 +1023,11 @@ func TestLexComment(t *testing.T) {
 			`/* * / */`,
 			[]*Token{
 				{
-					comment,
+					Comment,
 					" * / ",
 				},
 				{
-					eof,
+					Eof,
 					"eof",
 				},
 			},
