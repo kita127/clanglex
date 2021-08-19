@@ -92,6 +92,7 @@ const (
 	KeyVoid
 	KeyAsm
 	KeySizeof
+	KeyStatic
 	Comment
 	Illegal
 )
@@ -528,6 +529,8 @@ func (l *Lexer) determineKeyword(w string) *Token {
 		return &Token{TokenType: KeyAsm, Literal: w}
 	} else if strings.Compare("sizeof", w) == 0 {
 		return &Token{TokenType: KeySizeof, Literal: w}
+	} else if strings.Compare("static", w) == 0 {
+		return &Token{TokenType: KeyStatic, Literal: w}
 	} else {
 		return &Token{TokenType: Word, Literal: w}
 	}

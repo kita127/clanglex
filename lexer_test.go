@@ -921,6 +921,20 @@ int func(int a) {
 				},
 			},
 		},
+		{
+			"test static 1",
+			`static`,
+			[]*Token{
+				{
+					KeyStatic,
+					"static",
+				},
+				{
+					Eof,
+					"eof",
+				},
+			},
+		},
 	}
 
 	for _, tt := range testTbl {
