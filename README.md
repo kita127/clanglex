@@ -1,6 +1,8 @@
 # clanglex
 
-Go Library which lexicalizes C language
+Go Library which lexicalizes C language. 
+
+C ソースを字句解析する Go 言語ライブラリ. 
 
 ## Description
 
