@@ -842,6 +842,7 @@ func (t *Token) IsCompoundOp() bool {
 	return true
 }
 
+// IsToken
 func (t *Token) IsToken(t2 int) bool {
 	return t.TokenType == t2
 }
