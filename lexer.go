@@ -2,6 +2,7 @@ package clanglex
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -98,7 +99,171 @@ const (
 )
 
 func (t *Token) String() string {
-	return fmt.Sprintf("tokenType:%v, literal:%s", t.TokenType, t.Literal)
+	tts := ""
+	switch t.TokenType {
+	case Eof:
+		tts = "Eof"
+	case Word:
+		tts = "Word"
+	case Integer:
+		tts = "Integer"
+	case Float:
+		tts = "Float"
+	case Assign:
+		tts = "Assign"
+	case Plus:
+		tts = "Plus"
+	case Minus:
+		tts = "Minus"
+	case Bang:
+		tts = "Bang"
+	case Asterisk:
+		tts = "Asterisk"
+	case Slash:
+		tts = "Slash"
+	case Percent:
+		tts = "Percent"
+	case Lt:
+		tts = "Lt"
+	case Gt:
+		tts = "Gt"
+	case Eq:
+		tts = "Eq"
+	case Ne:
+		tts = "Ne"
+	case Gteq:
+		tts = "Gteq"
+	case Lteq:
+		tts = "Lteq"
+	case Semicolon:
+		tts = "Semicolon"
+	case Lparen:
+		tts = "Lparen"
+	case Rparen:
+		tts = "Rparen"
+	case Comma:
+		tts = "Comma"
+	case Lbrace:
+		tts = "Lbrace"
+	case Rbrace:
+		tts = "Rbrace"
+	case Lbracket:
+		tts = "Lbracket"
+	case Rbracket:
+		tts = "Rbracket"
+	case Ampersand:
+		tts = "Ampersand"
+	case Tilde:
+		tts = "Tilde"
+	case Caret:
+		tts = "Caret"
+	case Vertical:
+		tts = "Vertical"
+	case Colon:
+		tts = "Colon"
+	case Question:
+		tts = "Question"
+	case Period:
+		tts = "Period"
+	case Backslash:
+		tts = "Backslash"
+	case Str:
+		tts = "Str"
+	case Letter:
+		tts = "Letter"
+	case Arrow:
+		tts = "Arrow"
+	case LeftShift:
+		tts = "LeftShift"
+	case RightShift:
+		tts = "RightShift"
+	case Increment:
+		tts = "Increment"
+	case Decrement:
+		tts = "Decrement"
+	case And:
+		tts = "And"
+	case Or:
+		tts = "Or"
+	case PlusAssigne:
+		tts = "PlusAssigne"
+	case MinusAssigne:
+		tts = "MinusAssigne"
+	case AsteriskAssigne:
+		tts = "AsteriskAssigne"
+	case SlashAssigne:
+		tts = "SlashAssigne"
+	case VerticalAssigne:
+		tts = "VerticalAssigne"
+	case AmpersandAssigne:
+		tts = "AmpersandAssigne"
+	case LeftShiftAssigne:
+		tts = "LeftShiftAssigne"
+	case RightShiftAssigne:
+		tts = "RightShiftAssigne"
+	case TildeAssigne:
+		tts = "TildeAssigne"
+	case CaretAssigne:
+		tts = "CaretAssigne"
+	case PercentAssigne:
+		tts = "PercentAssigne"
+	case KeyReturn:
+		tts = "KeyReturn"
+	case KeyIf:
+		tts = "KeyIf"
+	case KeyElse:
+		tts = "KeyElse"
+	case KeyWhile:
+		tts = "KeyWhile"
+	case KeyDo:
+		tts = "KeyDo"
+	case KeyGoto:
+		tts = "KeyGoto"
+	case KeyFor:
+		tts = "KeyFor"
+	case KeyBreak:
+		tts = "KeyBreak"
+	case KeyContinue:
+		tts = "KeyContinue"
+	case KeySwitch:
+		tts = "KeySwitch"
+	case KeyCase:
+		tts = "KeyCase"
+	case KeyDefault:
+		tts = "KeyDefault"
+	case KeyExtern:
+		tts = "KeyExtern"
+	case KeyVolatile:
+		tts = "KeyVolatile"
+	case KeyConst:
+		tts = "KeyConst"
+	case KeyTypedef:
+		tts = "KeyTypedef"
+	case KeyUnion:
+		tts = "KeyUnion"
+	case KeyStruct:
+		tts = "KeyStruct"
+	case KeyEnum:
+		tts = "KeyEnum"
+	case KeyAttribute:
+		tts = "KeyAttribute"
+	case KeyVoid:
+		tts = "KeyVoid"
+	case KeyAsm:
+		tts = "KeyAsm"
+	case KeySizeof:
+		tts = "KeySizeof"
+	case KeyStatic:
+		tts = "KeyStatic"
+	case Comment:
+		tts = "Comment"
+	case Illegal:
+		tts = "Illegal"
+	default:
+		tts = strconv.Itoa(t.TokenType)
+	}
+
+	return fmt.Sprintf("TokenType:%v, Literal:%s", tts, t.Literal)
 }
 
 func NewLexer(src string) *Lexer {
