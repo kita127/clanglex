@@ -15,7 +15,10 @@ func main() {
 		panic(err)
 	}
 
-	tokens := clanglex.Lexicalize(string(input))
+	tokens, err := clanglex.Lexicalize(string(input))
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println(tokens)
 

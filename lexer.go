@@ -270,19 +270,22 @@ func NewLexer(src string) *Lexer {
 	return &Lexer{input: src, pos: 0}
 }
 
-func (l *Lexer) lexicalize() []*Token {
+func (l *Lexer) lexicalize() ([]*Token, error) {
 	ts := []*Token{}
 	for {
-		t := l.nextToken()
+		t, err := l.nextToken()
+		if err != nil {
+			return nil, err
+		}
 		ts = append(ts, t)
 		if t.TokenType == Eof {
 			break
 		}
 	}
-	return ts
+	return ts, nil
 }
 
-func (l *Lexer) nextToken() *Token {
+func (l *Lexer) nextToken() (*Token, error) {
 	// スペースをとばす
 	for {
 		i := l.pos
@@ -298,7 +301,7 @@ func (l *Lexer) nextToken() *Token {
 
 	// ソースの終端
 	if l.pos >= len(l.input) {
-		return &Token{TokenType: Eof, Literal: "eof"}
+		return &Token{TokenType: Eof, Literal: "eof"}, nil
 	}
 
 	var tk *Token
@@ -494,9 +497,11 @@ func (l *Lexer) nextToken() *Token {
 			tk = l.readWord()
 		} else if isDec(c) {
 			tk = l.readNumber()
+		} else {
+			return nil, fmt.Errorf("unknown character '%c'", c)
 		}
 	}
-	return tk
+	return tk, nil
 }
 
 func (l *Lexer) readWord() *Token {

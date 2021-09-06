@@ -1,7 +1,11 @@
 package clanglex
 
 // Lexicalize
-func Lexicalize(src string) []*Token {
+func Lexicalize(src string) ([]*Token, error) {
 	l := NewLexer(src)
-	return l.lexicalize()
+	tokens, err := l.lexicalize()
+	if err != nil {
+		return nil, err
+	}
+	return tokens, nil
 }
