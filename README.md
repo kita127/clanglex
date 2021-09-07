@@ -15,14 +15,14 @@ sample.go
 package main
 
 import (
-        "fmt"
+    "fmt"
 
-        lex "github.com/kita127/clanglex"
+    "github.com/kita127/clanglex"
 )
 
 func main() {
 
-        src := `
+    src := `
 int g_var;
 static unsigned long s_var = (long)(100U);
 
@@ -34,9 +34,12 @@ int main(void){
 }
 `
 
-        tokens := lex.Lexicalize(src)
+    tokens, err := clanglex.Lexicalize(input)
+    if err != nil {
+        panic(err)
+    }
 
-        fmt.Println(tokens)
+    fmt.Println(tokens)
 }
 ```
     $ go run ./sample.go 
