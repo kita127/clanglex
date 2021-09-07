@@ -144,7 +144,7 @@ int main(void){
 
 ``` go
 
-tokens := lex.Lexicalize(src)
+tokens, _ := clanglex.Lexicalize(src)
 
 for _, t := range tokens
 
